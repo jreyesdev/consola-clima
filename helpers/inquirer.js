@@ -8,16 +8,16 @@ const preguntas = [
         message: '¿Qué desea hacer?',
         choices: [
             {
-                value: '1',
+                value: 1,
                 name: `${ '1.'.green } Buscar ciudad`
             },
             {
-                value: '2',
+                value: 2,
                 name: `${ '2.'.green } Historial`
             },
             {
-                value: '3',
-                name: `${ '3.'.green } Salir`
+                value: 0,
+                name: `${ '0.'.green } Salir`
             }
         ]
     }
