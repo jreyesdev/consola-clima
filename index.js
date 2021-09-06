@@ -25,7 +25,7 @@ const main = async () => {
 
                 const { nombre, lat, long } = lugares.find(l => l.id === idSelect)
                 // Agrega ciudad
-                busquedas.agregarHistorial(nombre)
+                busquedas.agregarHistorial(nombre.toLowerCase())
                 // Clima
                 const { desc, temp, min, max } = await busquedas.climaLugar(lat,long)
                 // Mostrar resultados
@@ -40,7 +40,7 @@ const main = async () => {
                 c(`Maxima: ${max}`)
                 break
             case 2:
-                busquedas.historial.forEach((l,i) => {
+                busquedas.historialCapitalizado.forEach((l,i) => {
                     const idx = `${i + 1}.`.green
                     c(`${idx} ${l}`)
                 })
