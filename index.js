@@ -20,17 +20,19 @@ const main = async () => {
                 const lugares = await busquedas.lugares(lugar)
                 // Seleccionar el lugar
                 const idSelect = await listadoLugares(lugares)
-                const lugarSelect = lugares.find(l => l.id === idSelect)
+                const { nombre, lat, long } = lugares.find(l => l.id === idSelect)
                 // Clima
-                
+                const { desc, temp, min, max } = await busquedas.climaLugar(lat,long)
                 // Mostrar resultados
+                console.clear()
                 c('\nInformacion del clima\n'.green)
-                c(`Lugar: ${lugarSelect.nombre}`)
-                c(`Latitud: ${lugarSelect.lat}`)
-                c(`Longitud: ${lugarSelect.long}`)
-                c(`Temperatura: `)
-                c(`Minima: `)
-                c(`Maxima: `)
+                c(`Lugar: ${nombre}`)
+                c(`Latitud: ${lat}`)
+                c(`Longitud: ${long}`)
+                c(`Descripcion: ${desc}`)
+                c(`Temperatura: ${temp}`)
+                c(`Minima: ${min}`)
+                c(`Maxima: ${max}`)
                 break
             case 2:
                 break
