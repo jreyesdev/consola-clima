@@ -20,7 +20,12 @@ const main = async () => {
                 const lugares = await busquedas.lugares(lugar)
                 // Seleccionar el lugar
                 const idSelect = await listadoLugares(lugares)
+
+                if(idSelect === '0') continue
+
                 const { nombre, lat, long } = lugares.find(l => l.id === idSelect)
+                // Agrega ciudad
+                busquedas.agregarHistorial(nombre)
                 // Clima
                 const { desc, temp, min, max } = await busquedas.climaLugar(lat,long)
                 // Mostrar resultados
@@ -35,8 +40,10 @@ const main = async () => {
                 c(`Maxima: ${max}`)
                 break
             case 2:
-                break
-            default:
+                busquedas.historial.forEach((l,i) => {
+                    const idx = `${i + 1}.`.green
+                    c(`${idx} ${l}`)
+                })
                 break
         }
 
