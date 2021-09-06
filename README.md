@@ -1,5 +1,5 @@
 # Consola Clima
-Aplicación de consola para obtener datos del clima de una ciudad utilizando la API de [MAPBOX](https://www.mapbox.com)
+Aplicación de consola para obtener datos del clima de una ciudad utilizando la API de [MapBox](https://www.mapbox.com) y [OpenWeather](https://openweathermap.org/)
 
 ## Instalación
 Ejecuta el siguiente comando
