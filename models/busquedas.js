@@ -1,7 +1,10 @@
+const fs = require('fs')
+const path = require('path')
+
 const axios = require('axios')
 
 class Busquedas {
-    historial = ['Tegucipalga','Madrid','Barcelona']
+    historial = []
 
     constructor(){
         // TODO: leer si BBDD existe
@@ -61,6 +64,26 @@ class Busquedas {
         }catch(err){
             console.error(err)
         }
+    }
+
+    agregarHistorial(lugar=''){
+        // Solo 5 items
+        if(this.historial.length > 5){
+            this.historial = this.historial.slice(0,5)
+        }
+        // Filtra los diferente a lugar
+        this.historial = this.historial.filter(name => name !== lugar)
+        // Agrega de primero el lugar
+        this.historial.unshift(lugar)
+        // Guarda en arvhico json
+        this.guardaFile()
+    }
+
+    guardaFile(){
+        const payload = {
+            historial: this.historial
+        }
+        fs.writeFileSync(path.join(__dirname,'../db/database.json'),JSON.stringify(payload))
     }
 }
 
