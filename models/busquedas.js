@@ -5,13 +5,23 @@ const axios = require('axios')
 
 class Busquedas {
     historial = []
+    dirFile = path.join(__dirname,'../db/database.json')
 
     constructor(){
         // TODO: leer si BBDD existe
+        this.leeFile()
         this.mapBoxUrl = process.env.MAPBOX_URL
         this.mapBoxToken = process.env.MAPBOX_KEY
         this.openWURL = process.env.OPENWEATHER_URL
         this.openWKEY = process.env.OPENWEATHER_KEY
+    }
+
+    get historialCapitalizado(){
+        return this.historial.map(name => {
+            let n
+            n = name.split(' ').map(p => (p[0].toUpperCase() + p.substring(1)))
+            return n.join(' ')
+        })
     }
 
     get paramsMapBox(){
@@ -68,11 +78,11 @@ class Busquedas {
 
     agregarHistorial(lugar=''){
         // Solo 5 items
-        if(this.historial.length > 5){
+        if(this.historial && this.historial.length > 5){
             this.historial = this.historial.slice(0,5)
         }
         // Filtra los diferente a lugar
-        this.historial = this.historial.filter(name => name !== lugar)
+        this.historial = this.historial.filter(name => name !== lugar)           
         // Agrega de primero el lugar
         this.historial.unshift(lugar)
         // Guarda en arvhico json
@@ -81,9 +91,18 @@ class Busquedas {
 
     guardaFile(){
         const payload = {
-            historial: this.historial
+            historial: this.historial.map(name => name.toLowerCase())
         }
-        fs.writeFileSync(path.join(__dirname,'../db/database.json'),JSON.stringify(payload))
+        fs.writeFileSync(this.dirFile,JSON.stringify(payload))
+    }
+
+    leeFile(){
+        // Sale si no existe
+        if(! fs.existsSync(this.dirFile)) return
+        // Lee datos
+        const data = fs.readFileSync(this.dirFile,{encoding: 'utf-8'})
+        const parsed = JSON.parse(data)
+        this.historial = parsed.historial ? parsed.historial : []
     }
 }
 
