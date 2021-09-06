@@ -1,7 +1,7 @@
 {
   "name": "consola-clima",
   "version": "1.0.0",
-  "description": "",
+  "description": "Aplicacion de consola para obtener datos del clima de una ciudad",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,7 +9,7 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "axios": "^0.21.3",
     "colors": "^1.4.0",
