@@ -14,6 +14,9 @@ Crea un archivo `.env` en la raiz de la aplicacion y agrega las siguientes varia
 ```dosini
 MAPBOX_URL=
 MAPBOX_KEY=
+
+OPENWEATHER_URL=
+OPENWEATHER_KEY=
 ```
 
 ## Uso
